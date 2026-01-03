@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  helloworld:
+    image: helloworld:latest
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    healthcheck:
+      test: ["CMD", "dotnet", "HelloWorld.dll"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_POLL_INTERVAL: 60
+      WATCHTOWER_CLEANUP: "true"
+    command: --label-enable
