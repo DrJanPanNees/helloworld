@@ -23,4 +23,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+	  platforms: linux/amd64,linux/arm64  # <-- This line must be present for me :)
           tags: ghcr.io/drjanpannees/helloworld:latest
