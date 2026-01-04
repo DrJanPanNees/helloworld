@@ -1,7 +1,7 @@
-version: "3.8"
 services:
   helloworld:
-    image: helloworld:latest
+    image: ghcr.io/drjanpannees/helloworld:latest  # Use your actual username here
+    restart: unless-stopped
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     healthcheck:
@@ -12,9 +12,10 @@ services:
 
   watchtower:
     image: containrrr/watchtower
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      WATCHTOWER_POLL_INTERVAL: 60
+      WATCHTOWER_POLL_INTERVAL: 1800
       WATCHTOWER_CLEANUP: "true"
     command: --label-enable
